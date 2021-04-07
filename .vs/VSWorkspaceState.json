@@ -3,9 +3,11 @@
     "",
     "\\elearning",
     "\\learn",
+    "\\media",
+    "\\media\\uploaded",
     "\\templates",
     "\\templates\\learn"
   ],
-  "SelectedNode": "\\.gitignore",
+  "SelectedNode": "\\templates\\base.html",
   "PreviewInSolutionExplorer": false
 }

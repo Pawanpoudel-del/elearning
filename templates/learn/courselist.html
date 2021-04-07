@@ -4,6 +4,28 @@
  | Course List
 {% endblock %}
 {% block bodyblock %}
+<head>
+    <style>
+        .pag {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+            .pag a {
+                color: white;
+                float: left;
+                padding: 10px 16px;
+                text-decoration: none;
+            }
+
+                .pag a:hover:not(.active) {
+                    background-color: red;
+                    border-radius: 5px;
+                }
+    </style>
+
+</head>
 <section class="text-gray-400 bg-gray-900 body-font">
     <div class="container px-5 py-24 mx-auto">
         <div class="flex flex-wrap -m-4">
@@ -19,8 +41,22 @@
                     <p class="mt-1">Course Available: {{ object.stock }}</p>
                 </div>
             </div>
+
             {% endfor %}
         </div>
     </div>
+    <div class="pag">
+        Course {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+        <ul class="pag">
+            {% if page_obj.has_previous %}
+            <li><a href="?page=1">&laquo; Next Page</a></li>
+            <li><a href="?page={{ page_obj.previous_page_number }}">Previous Page</a></li>
+            {% endif %}
+            {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}">Next Page</a></li>
+            {% endif %}
+        </ul>
+    </div>
 </section>
+
 {% endblock %}

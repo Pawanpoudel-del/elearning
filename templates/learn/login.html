@@ -2,10 +2,13 @@
 {% block title %} | Login {% endblock %}
 
 {% block bodyblock %}
-<form method="POST">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+{{ data }}
+<form method="POST" class="container">
     {% csrf_token %}
-   <a>User Name: </a> <input type="text" value="username" name="username"><br />
-   <a>Password: </a> <input type="password" value="password" name="password"><br />
+    <a>User Name: </a> <input type="text" value="username" name="username"><br />
+    <a>Password: </a> <input type="password" value="password" name="password"><br />
     <input type="Submit" value="Login">
 </form>
 {% endblock %}

@@ -14,14 +14,15 @@ class Course(models.Model):
     image = models.ImageField(upload_to = 'uploaded')
     price = models.IntegerField()
     about =models.TextField()
+    detail =models.TextField()
     stock = models.BooleanField(default = True)
     slug =models.SlugField()
-    Category = models.ForeignKey(Category, on_delete = models.CASCADE)
+    category = models.ForeignKey(Category, on_delete = models.CASCADE)
 
     def __str__(self):
         return self.name
 
-class addtocart(models.Model):
+class Cart(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     ordered = models.BooleanField(default=False)
     item = models.ForeignKey(Course, on_delete=models.CASCADE)
@@ -30,11 +31,11 @@ class addtocart(models.Model):
     def __str__(self):
         return f"{self.quantity} of {self.item.name}"
 
-class cart(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    items = models.ManyToManyField(addtocart)
+class OrderedCourse(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    item = models.ForeignKey(Course, on_delete=models.CASCADE)
     start_date = models.DateTimeField(auto_now_add=True)
-    ordered_date = models.DateTimeField()
+    ordered_date = models.DateTimeField(auto_now_add=True)
     ordered = models.BooleanField(default=False)
 
     def __str__(self):
