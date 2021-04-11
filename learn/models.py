@@ -31,12 +31,24 @@ class Cart(models.Model):
     def __str__(self):
         return f"{self.quantity} of {self.item.name}"
 
+class Address(models.Model):
+    user=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    pradesh=models.IntegerField()
+    city=models.TextField()
+    country=models.TextField()
+    contact_number=models.IntegerField()
+
+    def __str__(self):
+        return self.user.username
+
 class OrderedCourse(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     item = models.ForeignKey(Course, on_delete=models.CASCADE)
+    address=models.ForeignKey(Address, on_delete=models.CASCADE)
     start_date = models.DateTimeField(auto_now_add=True)
     ordered_date = models.DateTimeField(auto_now_add=True)
     ordered = models.BooleanField(default=False)
 
     def __str__(self):
         return self.user.username
+

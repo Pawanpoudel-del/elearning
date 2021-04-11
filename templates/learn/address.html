@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %} | Address {% endblock %}
+
+{% block bodyblock %}
+<H1>Cart of {{ user.get_username }}</H1>
+{% for y in data %}
+<h1>{{ y.item.name }}</h1>
+<p>{{ y.item.price }}</p>
+{% endfor %}
+<section>
+    <form method="POST">
+        {% csrf_token %}
+        <label>
+            Pradesh No.
+            <input type="number" name='pradesh' required="required">
+        </label>
+        <label>
+            City
+            <input type="text" name='city' required="required">
+        </label>
+        <label>
+            Country
+            <input type="text" name='country' required="required">
+        </label>
+        <label>
+            Contact Number
+            <input type="number" name='contact-number'>
+        </label>
+        <input type="submit" value="Complete check out">
+    </form>
+</section>
+{% endblock %}

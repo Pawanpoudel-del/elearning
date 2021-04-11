@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, CreateView
 from learn.models import Course
 from django.utils import timezone
@@ -8,7 +8,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login as lgin, logout
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from .models import Cart
+from .models import Cart, Address
 from django.core.paginator import Paginator
 
 # Create your views here.
@@ -17,6 +17,9 @@ class CourseListView(ListView):
     paginate_by=1
     model=Course
 
+class CartListView(ListView):
+     template_name='learn/cart.html'
+     model= Cart
 
 class CourseDetailView(DetailView):
     template_name ='learn/coursedetail.html'
@@ -29,8 +32,9 @@ class CourseDetailView(DetailView):
             quantity = request.POST.get('quantity')
             y = Cart(user = username, item = item, quantity = quantity)
             y.save()
-            return render(request, 'index.html')
+            return redirect('learn:address')
         return render(request, 'learn/cart.html')
+
 
 
     def get_context_data(self, **kwargs):
@@ -58,3 +62,18 @@ def logout_view(request):
     logout_msg ="Logout Successfully"
     logout(request)
     return render(request, 'index.html', {'data':logout_msg})
+
+def address(request):
+    if request.POST.get('city') is not None:
+        username = request.user
+        pradesh = request.POST.get('pradesh')
+        city = request.POST.get('city') 
+        country = request.POST.get('country')
+        contact_number = request.POST.get('contact-number')
+
+        s = Address(user= username, pradesh=pradesh, city= city, country=country, contact_number= contact_number)
+        s.save()
+
+    cart_data = Cart.objects.filter(user=request.user)
+    return render(request, 'learn/address.html', {'data': cart_data})
+

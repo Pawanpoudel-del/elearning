@@ -4,10 +4,9 @@
     "\\elearning",
     "\\learn",
     "\\media",
-    "\\media\\uploaded",
     "\\templates",
     "\\templates\\learn"
   ],
-  "SelectedNode": "\\templates\\base.html",
+  "SelectedNode": "\\templates\\learn\\cart.html",
   "PreviewInSolutionExplorer": false
 }

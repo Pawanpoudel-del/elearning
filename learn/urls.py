@@ -1,6 +1,5 @@
 from django.urls import path
-from learn.views import CourseListView, CourseDetailView, UserCreateView, login, logout_view
-
+from learn.views import CourseListView, CourseDetailView, UserCreateView, login, logout_view, address, CartListView
 app_name ='learn'
 
 urlpatterns =[
@@ -9,4 +8,6 @@ urlpatterns =[
     path('signup/', UserCreateView.as_view(), name ='signup'),
     path('login/', login, name ='login'),
     path('logout/', logout_view, name ='logout'),
+    path('address/', address, name='address'),
+    path('cart/', CartListView.as_view(), name = 'cartlist'),
     ]

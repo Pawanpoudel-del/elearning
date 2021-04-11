@@ -2,9 +2,11 @@
 {% block title %} | Cart {% endblock %}
 
 {% block bodyblock %}
-<form method="POST">
-    {% csrf_token %}
-    <input type="number" name="quantity">
-    <input type="Submit" value="Submit">
-</form>
+<h1>Shopping Cart of {{ user.get_username }}</h1>
+{% for x in object_list %}
+<p>{{ x.item.name }}</p>
+<p>{{ x.item.price }}</p>
+{% endfor %}
 {% endblock %}
+
+
