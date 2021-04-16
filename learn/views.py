@@ -35,10 +35,11 @@ class CourseDetailView(DetailView):
                 obj = get_object_or_404(Cart, item = item)
                 obj.quantity = obj.quantity+ int(quantity)
                 obj.save()
+                return redirect('learn:address')
             else:
                 y = Cart(user = username, item = item, quantity = quantity)
                 y.save()
-            return redirect('learn:address')
+                return redirect('learn:address')
         return render(request, 'learn/cart.html')
 
 
