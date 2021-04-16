@@ -48,6 +48,7 @@ class OrderedCourse(models.Model):
     start_date = models.DateTimeField(auto_now_add=True)
     ordered_date = models.DateTimeField(auto_now_add=True)
     ordered = models.BooleanField(default=False)
+    sum = models.IntegerField()
 
     def __str__(self):
         return self.user.username

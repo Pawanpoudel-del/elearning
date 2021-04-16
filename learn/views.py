@@ -89,17 +89,22 @@ class Payment(DetailView):
     model=Cart
 
 def payment(request):
+    sum =0
+    for x in Cart.objects.filter(user = request.user):
+        print(x.item.price)
+        print(x.quantity)
+        sum = sum+x.item.price*x.quantity
     if request.POST.get('payment_method') is not None:
         username = request.user
         item =Cart.objects.filter(user =username)
         #address =Address.objects.get(user =username)
         address =Address.objects.filter(user =username).order_by('-id')[0]
-        s = OrderedCourse(user =username, address = address, ordered_date =datetime.datetime.now(), ordered = True)
+        s = OrderedCourse(user =username, address = address, ordered_date =datetime.datetime.now(), ordered = True, sum =sum*100)
         s.save()
         s.item.set =item
         s.save()
         return redirect('learn:courselist')
-    return render(request, 'learn/payment.html')
+    return render(request, 'learn/payment.html', {'data': sum*100})
     
 class ContactListView(ListView):
      template_name='learn/contact.html'
