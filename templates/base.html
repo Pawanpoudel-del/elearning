@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    {% block head_section %}{% endblock %}
 </head>
 <body>
 
@@ -15,16 +16,18 @@
             </a>
             {% if user.is_authenticated %}
             <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
-                <a class="mr-5 hover:text-white" href="http://127.0.0.1:8000/">E-Learning</a>
-                <a class="mr-5 hover:text-white" href="{% url 'learn:courselist' %}">Courses</a>
-                <a class="mr-5 hover:text-white" href="{% url 'learn:courselist' %}">Courses</a>
-                <a class="mr-5 hover:text-white" href="{% url 'learn:cartlist' %}">Cart</a>
+                <a class="mr-8 hover:text-white" href="http://127.0.0.1:8000/">E-Learning</a>
+                <a class="mr-8 hover:text-white" href="{% url 'learn:courselist' %}">Courses</a>
+                <a class="mr-8 hover:text-white" href="{% url 'learn:contact' %}">Contact</a>
+                <a class="mr-8 hover:text-white" href="http://127.0.0.1:8000/about/">About</a>
+                <a class="mr-8 hover:text-white" href="{% url 'learn:cartlist' %}">Cart</a>
             </nav>
             {% else %}
             <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
-                <a class="mr-5 hover:text-white" href="http://127.0.0.1:8000/">E-Learning</a>
-                <a class="mr-5 hover:text-white" href="{% url 'learn:courselist' %}">Courses</a>
-                <a class="mr-5 hover:text-white" href="{% url 'learn:courselist' %}">Courses</a>
+                <a class="mr-8 hover:text-white" href="http://127.0.0.1:8000/">E-Learning</a>
+                <a class="mr-8 hover:text-white" href="{% url 'learn:courselist' %}">Courses</a>
+                <a class="mr-8 hover:text-white" href="{% url 'learn:contact' %}">Contact</a>
+                <a class="mr-8 hover:text-white" href="http://127.0.0.1:8000/about/">About</a>
             </nav>
             {% endif %}
 
@@ -44,7 +47,7 @@
                     <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
                         <path d="M5 12h14M12 5l7 7-7 7"></path>
                     </svg>
-                </button>
+                </button>&nbsp;
             </a>
             <a href="{% url 'learn:login' %}">
                 <button class="inline-flex items-center bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0">
@@ -60,87 +63,36 @@
     {% block bodyblock %}
     {% endblock %}
     <footer class="text-gray-400 bg-gray-900 body-font">
-        <div class="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
+        <div class="container px-5 py-4 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
             <div class="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
-                <a class="flex title-font font-medium items-center md:justify-start justify-center text-white">
+                <a class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
                     <img src="https://s3.amazonaws.com/designmantic-logos/logos/2021/Mar/small-5145-605b76628a895.png" alt>
                     <span class="ml-3 text-xl">पाठशाला</span>
                 </a>
                 <p class="mt-2 text-sm text-gray-500">Leadership and learning are indispensable to each other.</p>
             </div>
-            <div class="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
-                <div class="lg:w-1/4 md:w-1/2 w-full px-4">
-                    <h2 class="title-font font-medium text-white tracking-widest text-sm mb-3">CATEGORIES</h2>
-                    <nav class="list-none mb-10">
-                        <li>
-                            <a class="text-gray-400 hover:text-white">E-Learning</a>
-                        </li>
-                        <li>
-                            <a class="text-gray-400 hover:text-white" href="{% url 'learn:courselist' %}">Courses</a>
-                        </li>
-                        <li>
-                            <a class="text-gray-400 hover:text-white">Third Link</a>
-                        </li>
-                        <li>
-                            <a class="text-gray-400 hover:text-white">Fourth Link</a>
-                        </li>
+
+                    {% if user.is_authenticated %}
+                    <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
+                        <a class="mr-8 hover:text-white" href="http://127.0.0.1:8000/">E-Learning</a>
+                        <a class="mr-8 hover:text-white" href="{% url 'learn:courselist' %}">Courses</a>
+                        <a class="mr-8 hover:text-white" href="{% url 'learn:contact' %}">Contact</a>
+                        <a class="mr-8 hover:text-white" href="http://127.0.0.1:8000/about/">About</a>
+                        <a class="mr-8 hover:text-white" href="{% url 'learn:cartlist' %}">Cart</a>
                     </nav>
-                </div>
-                <div class="lg:w-1/4 md:w-1/2 w-full px-4">
-                    <h2 class="title-font font-medium text-white tracking-widest text-sm mb-3">CATEGORIES</h2>
-                    <nav class="list-none mb-10">
-                        <li>
-                            <a class="text-gray-400 hover:text-white">First Link</a>
-                        </li>
-                        <li>
-                            <a class="text-gray-400 hover:text-white">Second Link</a>
-                        </li>
-                        <li>
-                            <a class="text-gray-400 hover:text-white">Third Link</a>
-                        </li>
-                        <li>
-                            <a class="text-gray-400 hover:text-white">Fourth Link</a>
-                        </li>
+                    {% else %}
+                    <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
+                        <a class="mr-8 hover:text-white" href="http://127.0.0.1:8000/">E-Learning</a>
+                        <a class="mr-8 hover:text-white" href="{% url 'learn:courselist' %}">Courses</a>
+                        <a class="mr-8 hover:text-white" href="{% url 'learn:contact' %}">Contact</a>
+                        <a class="mr-8 hover:text-white" href="http://127.0.0.1:8000/about/">About</a>
                     </nav>
-                </div>
-                <div class="lg:w-1/4 md:w-1/2 w-full px-4">
-                    <h2 class="title-font font-medium text-white tracking-widest text-sm mb-3">CATEGORIES</h2>
-                    <nav class="list-none mb-10">
-                        <li>
-                            <a class="text-gray-400 hover:text-white">First Link</a>
-                        </li>
-                        <li>
-                            <a class="text-gray-400 hover:text-white">Second Link</a>
-                        </li>
-                        <li>
-                            <a class="text-gray-400 hover:text-white">Third Link</a>
-                        </li>
-                        <li>
-                            <a class="text-gray-400 hover:text-white">Fourth Link</a>
-                        </li>
-                    </nav>
-                </div>
-                <div class="lg:w-1/4 md:w-1/2 w-full px-4">
-                    <h2 class="title-font font-medium text-white tracking-widest text-sm mb-3">CATEGORIES</h2>
-                    <nav class="list-none mb-10">
-                        <li>
-                            <a class="text-gray-400 hover:text-white">First Link</a>
-                        </li>
-                        <li>
-                            <a class="text-gray-400 hover:text-white">Second Link</a>
-                        </li>
-                        <li>
-                            <a class="text-gray-400 hover:text-white">Third Link</a>
-                        </li>
-                        <li>
-                            <a class="text-gray-400 hover:text-white">Fourth Link</a>
-                        </li>
-                    </nav>
-                </div>
-            </div>
+                    {% endif %}
+
         </div>
+
         <div class="bg-gray-800 bg-opacity-75">
-            <div class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
+            <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
                 <p class="text-gray-400 text-sm text-center sm:text-left">
                     &#169 2021
                     <a href="https://github.com/Pawanpoudel-del" rel="noopener noreferrer" class="text-gray-500 ml-1" target="_blank">@पाठशाला</a>

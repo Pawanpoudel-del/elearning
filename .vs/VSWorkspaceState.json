@@ -3,10 +3,9 @@
     "",
     "\\elearning",
     "\\learn",
-    "\\media",
     "\\templates",
     "\\templates\\learn"
   ],
-  "SelectedNode": "\\templates\\learn\\cart.html",
+  "SelectedNode": "\\learn\\views.py",
   "PreviewInSolutionExplorer": false
 }

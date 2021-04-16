@@ -2,11 +2,18 @@
 {% block title %} | Cart {% endblock %}
 
 {% block bodyblock %}
+<section class="text-gray-400 bg-gray-900 body-font relative">
+    
+    <div class="container py-4 mx-auto flex sm:flex-nowrap flex-wrap">
+  <div class="lg:w-1/2 md:w-1/2 flex flex-col md:ml-left w-full md:py-8 mt-8 md:mt-0">
 <h1>Shopping Cart of {{ user.get_username }}</h1>
 {% for x in object_list %}
 <p>{{ x.item.name }}</p>
 <p>{{ x.item.price }}</p>
 {% endfor %}
+</div>
+</div>
+</section>
 {% endblock %}
 
 

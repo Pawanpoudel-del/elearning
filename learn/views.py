@@ -8,8 +8,9 @@ from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login as lgin, logout
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from .models import Cart, Address
+from .models import Cart, Address, OrderedCourse, Course, Contact
 from django.core.paginator import Paginator
+import datetime
 
 # Create your views here.
 class CourseListView(ListView):
@@ -30,8 +31,13 @@ class CourseDetailView(DetailView):
             username = request.user
             item = get_object_or_404(Course, slug = slug)
             quantity = request.POST.get('quantity')
-            y = Cart(user = username, item = item, quantity = quantity)
-            y.save()
+            if Cart.objects.filter(item = item).exists():
+                obj = get_object_or_404(Cart, item = item)
+                obj.quantity = obj.quantity+ int(quantity)
+                obj.save()
+            else:
+                y = Cart(user = username, item = item, quantity = quantity)
+                y.save()
             return redirect('learn:address')
         return render(request, 'learn/cart.html')
 
@@ -70,10 +76,40 @@ def address(request):
         city = request.POST.get('city') 
         country = request.POST.get('country')
         contact_number = request.POST.get('contact-number')
-
         s = Address(user= username, pradesh=pradesh, city= city, country=country, contact_number= contact_number)
         s.save()
-
+        return redirect('learn:payment')
     cart_data = Cart.objects.filter(user=request.user)
     return render(request, 'learn/address.html', {'data': cart_data})
+
+
+class Payment(DetailView):
+    template_name ='learn/payment.html'
+    model=Cart
+
+def payment(request):
+    if request.POST.get('payment_method') is not None:
+        username = request.user
+        item =Cart.objects.filter(user =username)
+        #address =Address.objects.get(user =username)
+        address =Address.objects.filter(user =username).order_by('-id')[0]
+        s = OrderedCourse(user =username, address = address, ordered_date =datetime.datetime.now(), ordered = True)
+        s.save()
+        s.item.set =item
+        s.save()
+        return redirect('learn:courselist')
+    return render(request, 'learn/payment.html')
+    
+class ContactListView(ListView):
+     template_name='learn/contact.html'
+     model= Contact
+
+     def post(self, request, *args, **kwargs):
+        name=request.POST.get('name')
+        email=request.POST.get('email')
+        message=request.POST.get('message')
+        s= Contact(name=name, email=email, message=message)
+        s.save()
+        return render(request, 'learn/contact.html')
+        
 

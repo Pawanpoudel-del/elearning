@@ -2,31 +2,42 @@
 {% block title %} | Address {% endblock %}
 
 {% block bodyblock %}
-<H1>Cart of {{ user.get_username }}</H1>
-{% for y in data %}
-<h1>{{ y.item.name }}</h1>
-<p>{{ y.item.price }}</p>
-{% endfor %}
-<section>
-    <form method="POST">
-        {% csrf_token %}
-        <label>
-            Pradesh No.
-            <input type="number" name='pradesh' required="required">
-        </label>
-        <label>
-            City
-            <input type="text" name='city' required="required">
-        </label>
-        <label>
-            Country
-            <input type="text" name='country' required="required">
-        </label>
-        <label>
-            Contact Number
-            <input type="number" name='contact-number'>
-        </label>
-        <input type="submit" value="Complete check out">
-    </form>
-</section>
+
+<section class="text-gray-400 bg-gray-900 body-font relative">
+    
+    <div class="container py-4 mx-auto flex sm:flex-nowrap flex-wrap">
+  <div class="lg:w-1/2 md:w-1/2 flex flex-col md:ml-left w-full md:py-8 mt-8 md:mt-0">
+    <H1>Cart of {{ user.get_username }}</H1>
+    {% for y in data %}
+    <h1>{{ y.item.name }}</h1>
+    <p>{{ y.item.price }}</p>
+    {% endfor %}
+        
+        <form method="POST">
+            {% csrf_token %}
+            <div class="relative mb-4">
+                <label for="email" class="leading-7 text-sm text-gray-400">Pradesh No.</label>
+                <input type="number" name='pradesh' required="required" class="w-full bg-gray-800 rounded border border-gray-700 focus:border-red-500 focus:ring-2 focus:ring-red-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" required= "required">
+              </div>
+
+            <div class="relative mb-4">
+                <label for="email" class="leading-7 text-sm text-gray-400">City</label>
+                <input type="text" name='city' required="required" class="w-full bg-gray-800 rounded border border-gray-700 focus:border-red-500 focus:ring-2 focus:ring-red-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" required= "required">
+              </div>
+
+            <div class="relative mb-4">
+                <label for="email" class="leading-7 text-sm text-gray-400">Country</label>
+                <input type="text" name='country' required="required" class="w-full bg-gray-800 rounded border border-gray-700 focus:border-red-500 focus:ring-2 focus:ring-red-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" required= "required">
+              </div>
+
+            <div class="relative mb-4">
+                <label for="email" class="leading-7 text-sm text-gray-400">Contact Number</label>
+                <input type="number" name='contact-number' class="w-full bg-gray-800 rounded border border-gray-700 focus:border-red-500 focus:ring-2 focus:ring-red-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" required= "required">
+              </div>
+            <input type="submit" value="Complete check out"  class="flex ml-left text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded transition duration-500 ease-in-out bg-blue-600 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 ...">
+        </form>
+          </div>
+          </div>
+    </section>
 {% endblock %}
+
