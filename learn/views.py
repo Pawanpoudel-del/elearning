@@ -12,6 +12,7 @@ from .models import Cart, Address, OrderedCourse, Course, Contact
 from django.core.paginator import Paginator
 import datetime
 import requests
+from django.core.mail import send_mail
 
 # Create your views here.
 class CourseListView(ListView):
@@ -92,8 +93,6 @@ class Payment(DetailView):
 def payment(request):
     sum =0
     for x in Cart.objects.filter(user = request.user):
-        print(x.item.price)
-        print(x.quantity)
         sum = sum+x.item.price*x.quantity
     if request.POST.get('payment_method') == "red":
         username = request.user
@@ -125,7 +124,13 @@ def payment(request):
         s.save()
         s.item.set =item
         s.save()
-        print(response.content)
+        send_mail(
+            'Ordered Successfully. Thank you for ordering courses through this platform.',
+            'You have successfully purchased a course.',
+            settings.EMAIL_HOST_USER,
+            [request.user.email],
+            fail_silently=False,
+        )
         return redirect('learn:courselist')
     return render(request, 'learn/payment.html', {'data': sum*100})
     
