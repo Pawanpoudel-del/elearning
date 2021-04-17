@@ -11,6 +11,7 @@ from django.utils.decorators import method_decorator
 from .models import Cart, Address, OrderedCourse, Course, Contact
 from django.core.paginator import Paginator
 import datetime
+import requests
 
 # Create your views here.
 class CourseListView(ListView):
@@ -94,15 +95,37 @@ def payment(request):
         print(x.item.price)
         print(x.quantity)
         sum = sum+x.item.price*x.quantity
-    if request.POST.get('payment_method') is not None:
+    if request.POST.get('payment_method') == "red":
         username = request.user
         item =Cart.objects.filter(user =username)
         #address =Address.objects.get(user =username)
         address =Address.objects.filter(user =username).order_by('-id')[0]
-        s = OrderedCourse(user =username, address = address, ordered_date =datetime.datetime.now(), ordered = True, sum =sum*100)
+        s = OrderedCourse(user =username, address = address, ordered_date =datetime.datetime.now(), ordered = True, sum =sum*100, payment_choices= 'COD')
         s.save()
         s.item.set =item
         s.save()
+        return redirect('learn:courselist')
+    elif request.POST.get('payment_method') == "blue":
+        token = request.POST.get('token')
+        url = "https://khalti.com/api/v2/payment/verify/"
+        payload = {
+        "token": token,
+        "amount": 1000
+        }
+        headers = {
+        "Authorization": "Key live_secret_key_970b77a215224e0482282023a35abe2a"
+        }
+
+        response = requests.post(url, payload, headers = headers)
+        username = request.user
+        item =Cart.objects.filter(user =username)
+        #address =Address.objects.get(user =username)
+        address =Address.objects.filter(user =username).order_by('-id')[0]
+        s = OrderedCourse(user =username, address = address, ordered_date =datetime.datetime.now(), ordered = True, sum =sum*100, payment_choices= 'ONLINE', payment = True)
+        s.save()
+        s.item.set =item
+        s.save()
+        print(response.content)
         return redirect('learn:courselist')
     return render(request, 'learn/payment.html', {'data': sum*100})
     

@@ -1,5 +1,9 @@
 from django.db import models
 from django.conf import settings
+PAYMENT_METHOD = [
+    ('COD','CASH ON DELIVERY'),
+    ('ONLINE','KHALTI PAYMENT')
+]
 
 # Create your models here.
 class Category(models.Model):
@@ -49,6 +53,8 @@ class OrderedCourse(models.Model):
     ordered_date = models.DateTimeField(auto_now_add=True)
     ordered = models.BooleanField(default=False)
     sum = models.IntegerField()
+    payment_choices = models.CharField(max_length =200, choices = PAYMENT_METHOD)
+    payment = models.BooleanField(default=False)
 
     def __str__(self):
         return self.user.username

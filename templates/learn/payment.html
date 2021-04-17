@@ -33,10 +33,11 @@
     <h1><strong>Payment methods Available</strong></h1>
     <div>
         <section class="container">
-            <form method="POST">
+            <form method="POST" id="my-form">
                 {% csrf_token %}
                 <label><input type="radio" name="payment_method" value="red"> Cash on delivery</label><br/><br/>
                 <label><input type="radio" name="payment_method" value="blue"> Khalti</label>
+                <input type="hidden" id="token" name="token">
                 <div class="red box"><input type="submit" value="Cash on Delivery" class="flex ml-left text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded transition duration-500 ease-in-out bg-blue-600 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 ..."></div>
 
                 <!-- Place this where you need payment button -->
@@ -52,7 +53,7 @@
         <script>
             var config = {
                 // replace the publicKey with yours
-                "publicKey": "test_public_key_dc74e0fd57cb46cd93832aee0a390234",
+                "publicKey": "live_public_key_ee624fa4358a4f3093b37235a22bcaad",
                 "productIdentity": "1234567890",
                 "productName": "Dragon",
                 "productUrl": "http://gameofthrones.wikia.com/wiki/Dragons",
@@ -67,6 +68,10 @@
                     onSuccess(payload) {
                         // hit merchant api for initiating verfication
                         console.log(payload);
+                        console.log(payload['token']);
+                        document.getElementById("token").value = payload['token'];
+                        document.getElementById("my-form").submit();
+
                     },
                     onError(error) {
                         console.log(error);
@@ -81,7 +86,7 @@
             var btn = document.getElementById("payment-button");
             btn.onclick = function () {
                 // minimum transaction amount must be 10, i.e 1000 in paisa.
-                checkout.show({ amount: {{ data }} });
+                checkout.show({ amount: 1000 });
             }
         </script>
         <!-- Paste this code anywhere in you body tag -->
