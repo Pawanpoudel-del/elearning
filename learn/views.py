@@ -129,7 +129,7 @@ def payment(request):
             'You have successfully purchased a course.',
             settings.EMAIL_HOST_USER,
             [request.user.email],
-            fail_silently=False,
+            fail_silently=True,
         )
         return redirect('learn:courselist')
     return render(request, 'learn/payment.html', {'data': sum*100})
