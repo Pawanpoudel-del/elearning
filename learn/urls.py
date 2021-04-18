@@ -11,6 +11,6 @@ urlpatterns =[
     path('address/', address, name='address'),
     path('cart/', CartListView.as_view(), name = 'cartlist'),
     path('payment/', payment, name='payment'),
-    path('contact/', ContactListView.as_view(), name='contact')
+    path('contact/', ContactListView.as_view(), name='contact'),
     ]
     

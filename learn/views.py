@@ -1,6 +1,6 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, get_list_or_404
 from django.views.generic import ListView, DetailView, CreateView
-from learn.models import Course
+from learn.models import Course, Category
 from django.utils import timezone
 from django.conf import settings
 from learn.forms import UserCreateForm
@@ -13,11 +13,12 @@ from django.core.paginator import Paginator
 import datetime
 import requests
 from django.core.mail import send_mail
+from django.db.models import Q
 
 # Create your views here.
 class CourseListView(ListView):
     template_name ='learn/courselist.html'
-    paginate_by=1
+    paginate_by=8
     model=Course
 
 class CartListView(ListView):
@@ -146,4 +147,45 @@ class ContactListView(ListView):
         s.save()
         return render(request, 'learn/contact.html')
         
+class CategoryView(ListView):
+    model = Category
+    template_name = 'learn/curriculum.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['now'] = timezone.now()
+        return context
+
+class CategoryList(ListView):
+    model = Course
+    template_name = 'learn/curriculumdetail.html'
+
+    def get_queeyset(self):
+        seelf.course = get_list_or_404(Course, category__url =self.kwargs['url'])
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['now'] = timezone.now()
+        return context
+
+def search(request):
+    if request.method == 'GET':
+        query= request.GET.get('q')
+
+        submitbutton= request.GET.get('submit')
+
+        if query is not None:
+            lookups= Q(name__icontains=query) | Q(about__icontains=query)
+
+            results= Course.objects.filter(lookups).distinct()
+
+            context={'results': results,
+                     'submitbutton': submitbutton}
+
+            return render(request, 'learn/search.html', context)
+
+        else:
+            return render(request, 'learn/search.html')
+
+    else:
+        return render(request, 'learn/search.html')

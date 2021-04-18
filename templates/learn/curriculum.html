@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %} | Curriculum {% endblock %}
+
+{% block bodyblock %}
+    {% for x in object_list %}
+    <p>
+    <a href="{{x.url}}">{{x.name}}</a>
+</p>
+    {% endfor %}
+   {% endblock %}
