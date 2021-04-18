@@ -161,7 +161,7 @@ class CategoryList(ListView):
     template_name = 'learn/curriculumdetail.html'
 
     def get_queeyset(self):
-        seelf.course = get_list_or_404(Course, category__url =self.kwargs['url'])
+        self.course = get_list_or_404(Course, category__url =self.kwargs['url'])
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -182,10 +182,10 @@ def search(request):
             context={'results': results,
                      'submitbutton': submitbutton}
 
-            return render(request, 'learn/search.html', context)
+            return render(request, 'learn/courselist.html', context)
 
         else:
-            return render(request, 'learn/search.html')
+            return render(request, 'learn/courselist.html')
 
     else:
-        return render(request, 'learn/search.html')
+        return render(request, 'learn/courselist.html')

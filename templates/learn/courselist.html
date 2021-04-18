@@ -26,9 +26,27 @@
     </style>
 
 </head>
+
 <section class="text-gray-400 bg-gray-900 body-font">
     <div class="container px-5 py-24 mx-auto">
+        <div class="search">
+    
+            <br/>
+        <form action="{% url 'searchposts' %}" method="GET" value="{{request.GET.q}}">
+            Search <input type="text" name="q" value="{{request.GET.q}}" placeholder="Search posts" class=" bg-gray-800 rounded border border-gray-700 focus:border-red-500 focus:ring-2 focus:ring-red-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/><br/><br/>
+            <input type="submit" name="submit" value="Search"class="flex ml-left text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded transition duration-500 ease-in-out bg-blue-600 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 ..."/>
+        </form><br/>
+        
+        
+        {% if submitbutton == 'Search' and request.GET.q != '' %} {% if results %}
+        <h1>Results for <b>{{ request.GET.q }}</b></h1>
+        <br/><br/> {% for result in results %} {{result.name}}
+        <br/> {{result.about}}<br/> {{result.price}}<br/> {{result.detail}} <br/> <img alt="ecommerce" class="object-relative object-center block" src="../media/{{ result.image }}">
+        <br/> {% endfor %} {% else %} No search results for this query {% endif %} {% endif %}
+        </div>
+        
         <div class="flex flex-wrap -m-4">
+            
             {% for object in object_list %}
             <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
                 <a class="block relative h-48 rounded overflow-hidden" href="{{ object.slug }}">
@@ -45,6 +63,7 @@
             {% endfor %}
         </div>
     </div>
+
     <div class="pag">
         Course {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
         <ul class="pag">
