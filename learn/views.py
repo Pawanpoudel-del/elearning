@@ -160,7 +160,7 @@ class CategoryList(ListView):
     model = Course
     template_name = 'learn/curriculumdetail.html'
 
-    def get_queeyset(self):
+    def get_queryset(self):
         self.course = get_list_or_404(Course, category__url =self.kwargs['url'])
 
     def get_context_data(self, **kwargs):
