@@ -16,19 +16,19 @@
             </a>
             {% if user.is_authenticated %}
             <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
-                <a class="mr-8 hover:text-white" href="http://127.0.0.1:8000/">E-Learning</a>
+                <a class="mr-8 hover:text-white" href="{% url 'index' %}">E-Learning</a>
                 <a class="mr-8 hover:text-white" href="{% url 'learn:courselist' %}">Courses</a>
                 <a class="mr-8 hover:text-white" href="{% url 'learn:contact' %}">Contact</a>
-                <a class="mr-8 hover:text-white" href="http://127.0.0.1:8000/curriculum/">Curriculum</a>
-                <a class="mr-8 hover:text-white" href="http://127.0.0.1:8000/about/">About</a>
+                <a class="mr-8 hover:text-white" href="{% url 'learn:curriculum' %}">Curriculum</a>
+                <a class="mr-8 hover:text-white" href="{% url 'about' %}">About</a>
                 <a class="mr-8 hover:text-white" href="{% url 'learn:cartlist' %}">Cart</a>
             </nav>
             {% else %}
             <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
-                <a class="mr-8 hover:text-white" href="http://127.0.0.1:8000/">E-Learning</a>
+                <a class="mr-8 hover:text-white" href="{% url 'index' %}">E-Learning</a>
                 <a class="mr-8 hover:text-white" href="{% url 'learn:courselist' %}">Courses</a>
                 <a class="mr-8 hover:text-white" href="{% url 'learn:contact' %}">Contact</a>
-                <a class="mr-8 hover:text-white" href="http://127.0.0.1:8000/about/">About</a>
+                <a class="mr-8 hover:text-white" href="{% url 'about' %}">About</a>
             </nav>
             {% endif %}
 
@@ -75,19 +75,19 @@
 
                     {% if user.is_authenticated %}
                     <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
-                        <a class="mr-8 hover:text-white" href="http://127.0.0.1:8000/">E-Learning</a>
+                        <a class="mr-8 hover:text-white" href="{% url 'index' %}">E-Learning</a>
                         <a class="mr-8 hover:text-white" href="{% url 'learn:courselist' %}">Courses</a>
                         <a class="mr-8 hover:text-white" href="{% url 'learn:contact' %}">Contact</a>
-                        <a class="mr-8 hover:text-white" href="http://127.0.0.1:8000/curriculum/">Curriculum</a>
-                        <a class="mr-8 hover:text-white" href="http://127.0.0.1:8000/about/">About</a>
+                        <a class="mr-8 hover:text-white" href="{% url 'learn:curriculum' %}">Curriculum</a>
+                        <a class="mr-8 hover:text-white" href="{% url 'about' %}">About</a>
                         <a class="mr-8 hover:text-white" href="{% url 'learn:cartlist' %}">Cart</a>
                     </nav>
                     {% else %}
                     <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
-                        <a class="mr-8 hover:text-white" href="http://127.0.0.1:8000/">E-Learning</a>
+                        <a class="mr-8 hover:text-white" href="{% url 'index' %}">E-Learning</a>
                         <a class="mr-8 hover:text-white" href="{% url 'learn:courselist' %}">Courses</a>
                         <a class="mr-8 hover:text-white" href="{% url 'learn:contact' %}">Contact</a>
-                        <a class="mr-8 hover:text-white" href="http://127.0.0.1:8000/about/">About</a>
+                        <a class="mr-8 hover:text-white" href="{% url 'about' %}">About</a>
                     </nav>
                     {% endif %}
 

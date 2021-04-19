@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect, get_list_or_404
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, TemplateView
 from learn.models import Course, Category
 from django.utils import timezone
 from django.conf import settings
@@ -189,3 +189,7 @@ def search(request):
 
     else:
         return render(request, 'learn/courselist.html')
+
+class About(TemplateView):
+    template_name = 'about.html' 
+    

@@ -19,16 +19,14 @@ from django.views.generic import TemplateView
 from learn import urls
 from . import settings
 from django.conf.urls.static import static
-from learn.views import CategoryView, CategoryList, search
+from learn.views import search, About
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', TemplateView.as_view(template_name='index.html')),
-    path('about/', TemplateView.as_view(template_name='about.html')),
+    path('', TemplateView.as_view(template_name='index.html'), name = 'index'),
+    path('about/', TemplateView.as_view(template_name='about.html'), name='about'),
     path('course/',include('learn.urls')),
     path('ratings/', include('star_ratings.urls', namespace='ratings')),
-    path('curriculum/',CategoryView.as_view()),
-    path('curriculum/<url>', CategoryList.as_view()),
     path('search', search, name = 'searchposts'),
 ]
 

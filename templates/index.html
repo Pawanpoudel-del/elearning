@@ -16,8 +16,8 @@
             </h1>
             <p class="mb-8 leading-relaxed">E-learning could be a structured course or learning experience delivered electronically; it may include performance support content. While ATD style uses a hyphen within the spelling, you'll also see it spelled elearning or eLearning.</p>
             <div class="flex justify-center">
-                <a href="http://127.0.0.1:8000/about/"><button class="inline-flex text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded text-lg">About</button></a>
-                <a href="http://127.0.0.1:8000/course/contact/"> <button class="ml-4 inline-flex text-gray-400 bg-gray-800 border-0 py-2 px-6 focus:outline-none hover:bg-gray-700 hover:text-white rounded text-lg" >Contact</button></a>
+                <a href="{% url 'about' %}"><button class="inline-flex text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded text-lg">About</button></a>
+                <a href="{% url 'learn:contact' %}"> <button class="ml-4 inline-flex text-gray-400 bg-gray-800 border-0 py-2 px-6 focus:outline-none hover:bg-gray-700 hover:text-white rounded text-lg" >Contact</button></a>
             </div>
         </div>
     </div>
